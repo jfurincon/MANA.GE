@@ -108,9 +108,9 @@ class Task{
             cout << "1. Baja";
             cout << "2. Media";
             cout << "3. Alta";
-            int option;
-            cin >> option;
-            switch(option){
+            int statusOption;
+            cin >> statusOption;
+            switch(statusOption){
                 case 1:
                     priority = "Baja";
                     break;
@@ -155,4 +155,4 @@ class Task{
     };
 
 
-}
+};
