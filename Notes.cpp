@@ -74,4 +74,4 @@ class Note{
             }
             setReaction(reaction);
         }
-}
+};

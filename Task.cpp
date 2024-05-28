@@ -20,7 +20,7 @@ class Task{
     void setName(string name){
         this->name = name;
     }
-    string getName(){
+    string getName() const {
         return this->name;
     }
 
@@ -50,6 +50,10 @@ class Task{
     }
     string getPriority(){
         return this->priority;
+    }
+
+    vector<string> getResponsibles(){
+        return this->variousResponsibles;
     }
 
     // Metodos
@@ -112,16 +116,16 @@ class Task{
             cin >> statusOption;
             switch(statusOption){
                 case 1:
-                    priority = "Baja";
+                    priority = "a. Baja";
                     break;
                 case 2:
-                    priority = "Media";
+                    priority = "b. Media";
                     break;
                 case 3:
-                    priority = "Alta";
+                    priority = "c. Alta";
                     break;
                 default:
-                    priority = "Baja";
+                    priority = "a. Baja";
                     break;
             }
         setPriority(priority);
@@ -154,5 +158,16 @@ class Task{
         cout << "El estado de la tarea ha sido cambiado a: " << getStatus() << endl;
     };
 
-
+    void orderResponsibles(){
+        // ordenar por nombre de los responsables
+        for(int i = 0; i < variousResponsibles.size(); i++){
+            for(int j = 0; j < variousResponsibles.size(); j++){
+                if(variousResponsibles[i] < variousResponsibles[j]){
+                    string temp = variousResponsibles[i];
+                    variousResponsibles[i] = variousResponsibles[j];
+                    variousResponsibles[j] = temp;
+                }
+            }
+        }
+    };
 };

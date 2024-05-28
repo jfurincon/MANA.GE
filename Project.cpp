@@ -10,6 +10,7 @@ class Project{
         string status;
         string deadline; // la fecha debe ser un input dd/mm/yyyy
         // para poder convertir el string a un formato de fecha y tener la posibilidad de compararlas con la libreria <ctime>
+        int priority;
     public:
         // Constructor vacio
         Project(){
@@ -19,7 +20,7 @@ class Project{
         void setName(string name){
             this->name = name;
         }
-        string getName(){
+        string getName() const {
             return this->name;
         }
 
@@ -104,5 +105,10 @@ class Project{
             cout << "Descripcion: " << getDescription() << endl;
             cout << "Estado: " << getStatus() << endl;
             cout << "Fecha limite: " << getDeadline() << endl;
+        };
+
+        bool operator<(const Project& other) const { // Sobrecarga del operador < para poder comparar objetos de tipo Project
+        // Define tu lógica de comparación aquí
+        return priority < other.priority; // Por ejemplo, puedes comparar por prioridad
         };
 };
