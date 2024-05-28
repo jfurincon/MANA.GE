@@ -9,6 +9,20 @@
 
 using namespace std;
 
+// funcion de busqueda de proyectos por nombre
+void searchProjectbyName(vector<Project> &projects, string name){
+    for(int i = 0; i < projects.size(); i++){
+        if(projects[i].getName() == name){
+            cout << "Proyecto encontrado: " << endl;
+            cout << "Nombre: " << projects[i].getName() << endl;
+            cout << "Status: " << projects[i].getStatus() << endl;
+            cout << "Deadline: " << projects[i].getDeadline() << endl;
+        }else{
+            cout << "Proyecto no encontrado" << endl;
+        }
+    }
+};
+
 void orderProjectsbyName(vector<Project> &projects){
     for(int i = 0; i < projects.size(); i++){
         for(int j = 0; j < projects.size(); j++){
@@ -120,6 +134,7 @@ int main(){
                             outfile << project1.getName() << endl;
                             outfile << project1.getStatus() << endl;
                             outfile << project1.getDeadline() << endl;
+                            outfile << project1.getDescription() << endl;
                             outfile << endl;
 
                             variousProjects.push_back(project1);
@@ -128,6 +143,9 @@ int main(){
                         for(int i = 0; i < variousProjects.size(); i++){
                             cout << "Proyecto " << i+1 << ":";
                             cout << variousProjects[i].getName() << endl;
+                            cout << "Status: " << variousProjects[i].getStatus() << endl;
+                            cout << "Deadline: " << variousProjects[i].getDeadline() << endl;
+                            cout << "Descripcion: " << variousProjects[i].getDescription() << endl;
                             cout << "Tareas relacionadas: " << endl;
 
                             // se imprime el mapa de tareas relacionadas a un proyecto
@@ -147,30 +165,52 @@ int main(){
 
                         cout << "1. Ordenar proyectos por nombre" << endl;
                         cout << "2. Ordenar proyectos por fecha limite" << endl;
+                        cout << "3. Busqueda de proyecto por nombre" << endl;
 
                         int orderOption;
                         cin >> orderOption;
 
                         if(orderOption == 1){
                             orderProjectsbyName(variousProjects);
+                            // se imprime nuevamente el vector de proyectos ya ordenado
+                            for(int i = 0; i < variousProjects.size(); i++){
+                                cout << "Proyecto " << i+1 << ":";
+                                cout << variousProjects[i].getName() << endl;
+                                cout << "Tareas relacionadas: " << endl;
+                                for(int j = 0; j < task_map[variousProjects[i]].size(); j++){
+                                    cout << "Tarea " << j+1 << ":";
+                                    cout << task_map[variousProjects[i]][j].getName() << endl;
+                                }
+                                cout << "Notas relacionadas: " << endl;
+                                for(int j = 0; j < noteP_map[variousProjects[i]].size(); j++){
+                                    cout << "Nota " << j+1 << ":";
+                                    cout << noteP_map[variousProjects[i]][j].getTitle() << endl;
+                                }
+                                cout << endl;
+                            }
                         }else if(orderOption == 2){
                             orderProjectbyDate(variousProjects);
-                        }
-                        // se imprime nuevamente el vector de proyectos ya ordenado
-                        for(int i = 0; i < variousProjects.size(); i++){
-                            cout << "Proyecto " << i+1 << ":";
-                            cout << variousProjects[i].getName() << endl;
-                            cout << "Tareas relacionadas: " << endl;
-                            for(int j = 0; j < task_map[variousProjects[i]].size(); j++){
-                                cout << "Tarea " << j+1 << ":";
-                                cout << task_map[variousProjects[i]][j].getName() << endl;
+                            // se imprime nuevamente el vector de proyectos ya ordenado
+                            for(int i = 0; i < variousProjects.size(); i++){
+                                cout << "Proyecto " << i+1 << ":";
+                                cout << variousProjects[i].getName() << endl;
+                                cout << "Tareas relacionadas: " << endl;
+                                for(int j = 0; j < task_map[variousProjects[i]].size(); j++){
+                                    cout << "Tarea " << j+1 << ":";
+                                    cout << task_map[variousProjects[i]][j].getName() << endl;
+                                }
+                                cout << "Notas relacionadas: " << endl;
+                                for(int j = 0; j < noteP_map[variousProjects[i]].size(); j++){
+                                    cout << "Nota " << j+1 << ":";
+                                    cout << noteP_map[variousProjects[i]][j].getTitle() << endl;
+                                }
+                                cout << endl;
                             }
-                            cout << "Notas relacionadas: " << endl;
-                            for(int j = 0; j < noteP_map[variousProjects[i]].size(); j++){
-                                cout << "Nota " << j+1 << ":";
-                                cout << noteP_map[variousProjects[i]][j].getTitle() << endl;
-                            }
-                            cout << endl;
+                        }else if(orderOption == 3){
+                            string name;
+                            cout << "Ingrese el nombre del proyecto a buscar: ";
+                            cin >> name;
+                            searchProjectbyName(variousProjects, name);
                         }
                     }else if(option == 3){
                         cout << "Bienvenido al apartado de tareas! Que desea hacer?" << endl;
